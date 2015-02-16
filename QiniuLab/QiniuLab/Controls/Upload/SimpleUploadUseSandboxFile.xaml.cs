@@ -45,6 +45,7 @@ namespace QiniuLab.Controls.Upload
                 string fileName = createFile(fileSize);
                 //upload file by filename
                 uploadFile(fileName);
+                deleteFile(fileName);
             });
 
         }
@@ -144,6 +145,16 @@ namespace QiniuLab.Controls.Upload
             {
                 this.LogTextBlock.Text += "\r\n" + msg;
             });
+        }
+
+        private void deleteFile(string fileName)
+        {
+            IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication();
+            try
+            {
+                storage.DeleteFile(fileName);
+            }
+            catch (Exception) { }
         }
     }
 }
