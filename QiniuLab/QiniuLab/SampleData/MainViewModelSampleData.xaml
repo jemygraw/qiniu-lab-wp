@@ -1,0 +1,29 @@
+﻿<vm:MainViewModel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:QiniuLab.ViewModels"
+    SampleProperty="Sample Text Property Value">
+
+    <vm:MainViewModel.SimpleUploadItems>
+        <vm:ItemViewModel Name="无Key文件上传" />
+        <vm:ItemViewModel Name="有Key文件上传" />
+        <vm:ItemViewModel Name="使用SaveKey指定文件名" />
+        <vm:ItemViewModel Name="使用扩展参数作为SaveKey"/>
+        <vm:ItemViewModel Name="使用ReturnBody自定义返回内容"/>
+        <vm:ItemViewModel Name="文件同名(key)覆盖上传"/>
+        <vm:ItemViewModel Name="限制文件上传大小"/>
+        <vm:ItemViewModel Name="限制文件上传类型"/>
+        <vm:ItemViewModel Name="指定上传文件的MimeType"/>
+        <vm:ItemViewModel Name="启用上传文件CRC32校验"/>
+        <vm:ItemViewModel Name="使用EndUser标注终端"/>
+    </vm:MainViewModel.SimpleUploadItems>
+
+    <vm:MainViewModel.AdvancedUploadItems>
+        <vm:ItemViewModel Name="无Key大文件断点续传"/>
+        <vm:ItemViewModel Name="有Key大文件断点续传"/>
+        <vm:ItemViewModel Name="批量文件上传"/>
+        <vm:ItemViewModel Name="回调上传-URL参数格式"/>
+        <vm:ItemViewModel Name="回调上传-JSON参数格式"/>
+        <vm:ItemViewModel Name="上传后文件持久化操作"/>
+    </vm:MainViewModel.AdvancedUploadItems>
+</vm:MainViewModel>
