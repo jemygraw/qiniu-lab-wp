@@ -52,10 +52,9 @@ namespace QiniuLab
                 case 0:
                     navUrl = string.Format("/Controls/Upload/SimpleUploadWithoutKey.xaml?selectedItem={0}", ivm.ID); break;
                 case 11:
-                    navUrl = string.Format("/Controls/Upload/SimpleUploadUseSandboxFile.xaml?selectedItem={0}",ivm.ID);break;
+                    navUrl = string.Format("/Controls/Upload/SimpleUploadUseSandboxFile.xaml?selectedItem={0}", ivm.ID); break;
             }
-            if (
-                !string.IsNullOrWhiteSpace(navUrl))
+            if (!string.IsNullOrWhiteSpace(navUrl))
             {
                 NavigationService.Navigate(new Uri(navUrl, UriKind.Relative));
             }

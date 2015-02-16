@@ -28,17 +28,17 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <StackPanel>
-                <TextBlock Text="请输入文件大小"/>
+        <StackPanel HorizontalAlignment="Left" Height="640" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="460">
+                <TextBlock Text="请输入文件大小" Margin="10,0,10,0"/>
                 <TextBox x:Name="FileSize"/>
                 <Button x:Name="UploadFileButton" Content="上传" Click="UploadFileButton_Click"/>
                 <ProgressBar x:Name="ProgressBar"  Height="30"/>
-                <StackPanel Background="Gray" Height="442">
-                    <TextBlock  x:Name="LogTextBlock"  TextWrapping="Wrap" Height="442" Margin="0,0,0,0"/>
-                </StackPanel>
-            </StackPanel>
-        </Grid>
+                <StackPanel Background="Gray" Height="450" Margin="10,10,10,10">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBlock  x:Name="LogTextBlock"  TextWrapping="Wrap" Height="430" Margin="10,10,10,10"/>
+                </ScrollViewer>
+            </StackPanel>  
+        </StackPanel>
     </Grid>
 
 </phone:PhoneApplicationPage>

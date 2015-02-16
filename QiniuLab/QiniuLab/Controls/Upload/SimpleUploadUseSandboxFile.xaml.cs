@@ -27,6 +27,19 @@ namespace QiniuLab.Controls.Upload
             this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_WITHOUT_KEY_UPTOKEN);
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (DataContext == null)
+            {
+                string selectedIndex = "";
+                if (NavigationContext.QueryString.TryGetValue("selectedItem", out selectedIndex))
+                {
+                    int index = int.Parse(selectedIndex);
+                    DataContext = App.ViewModel.SimpleUploadItems[index];
+                }
+            }
+        }
+
         private void UploadFileButton_Click(object sender, RoutedEventArgs e)
         {
             int fileSize = 0;
@@ -67,7 +80,15 @@ namespace QiniuLab.Controls.Upload
                     {
                         sw.Write("x");
                     }
-                    sw.Flush();
+                    try
+                    {
+                        sw.Flush();
+                    }
+                    catch (Exception)
+                    {
+                        writeLog("创建文件失败!");
+                        return null;
+                    }
                 }
             }
             return fileName;
@@ -75,7 +96,11 @@ namespace QiniuLab.Controls.Upload
 
         private void uploadFile(string fileName)
         {
-            writeLog("准备上传..."+fileName);
+            if (fileName == null)
+            {
+                return;
+            }
+            writeLog("准备上传..." + fileName);
             if (this.httpManager == null)
             {
                 this.httpManager = new HttpManager();
