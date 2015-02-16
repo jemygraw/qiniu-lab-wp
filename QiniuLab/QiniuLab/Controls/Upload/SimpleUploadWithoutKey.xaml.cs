@@ -44,8 +44,11 @@ namespace QiniuLab.Controls.Upload
         {
             if (e != null && e.Error == null)
             {
+                //clear log
+                LogTextBlock.Text = "";
                 this.uploadFileStream = e.ChosenPhoto;
                 this.FileName.Text = e.OriginalFileName;
+                writeLog("选取文件:"+e.OriginalFileName);
             }
         }
 
@@ -55,6 +58,7 @@ namespace QiniuLab.Controls.Upload
             {
                 return;
             }
+          
             Task.Factory.StartNew(() =>
             {
                 uploadFile();
@@ -67,8 +71,11 @@ namespace QiniuLab.Controls.Upload
             });
         }
 
+
+
         private void uploadFile()
         {
+            writeLog("准备上传...");
             if (this.httpManager == null)
             {
                 this.httpManager = new HttpManager();
@@ -81,6 +88,7 @@ namespace QiniuLab.Controls.Upload
                     if (respDict.ContainsKey("uptoken"))
                     {
                         string upToken = respDict["uptoken"];
+                        writeLog("获取上传凭证:"+upToken);
                         UploadOptions uploadOptions = new UploadOptions();
                         uploadOptions.ProgressCallback = new ProgressCallback(delegate(int bytesWritten, int totalBytes){
                             int progress = (bytesWritten * 100 / totalBytes);
@@ -88,6 +96,7 @@ namespace QiniuLab.Controls.Upload
                                 ProgressBar.Value = progress;
                             });
                         });
+                        writeLog("开始上传文件...");
                         FormUploader.uploadStream(httpManager, this.uploadFileStream, null, upToken, uploadOptions, new CompletionCallback(delegate(ResponseInfo uploadRespInfo, string uploadResponse)
                         {
                             if (uploadRespInfo.isOk())
@@ -120,6 +129,13 @@ namespace QiniuLab.Controls.Upload
                 }
             });
             httpManager.post(upTokenUrl);
+        }
+
+        private void writeLog(string msg)
+        {
+            Dispatcher.BeginInvoke(() => {
+                this.LogTextBlock.Text += "\r\n" + msg;
+            });
         }
     }
 }

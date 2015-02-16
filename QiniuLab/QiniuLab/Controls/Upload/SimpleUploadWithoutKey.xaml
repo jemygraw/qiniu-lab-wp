@@ -34,7 +34,11 @@
             <Button x:Name="UploadFileButton" Content="上传" Click="UploadFileButton_Click"/>
             <ProgressBar x:Name="ProgressBar"  Height="30"/>
             <StackPanel Height="351" Background="Gray" Margin="10,0,10,0">
-                <TextBlock TextWrapping="Wrap" Height="351" Margin="0,0,0,0"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="LogTextBlock" 
+                               TextWrapping="Wrap" Height="351" Margin="0,0,0,0"
+                               />
+                </ScrollViewer>
             </StackPanel>
         </StackPanel>
     </Grid>
