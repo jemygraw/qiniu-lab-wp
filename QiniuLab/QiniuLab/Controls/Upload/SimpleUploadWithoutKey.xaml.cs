@@ -6,6 +6,7 @@ using System.IO;
 using Qiniu.Http;
 using Newtonsoft.Json;
 using Qiniu.Storage;
+using System.Threading.Tasks;
 namespace QiniuLab.Controls.Upload
 {
     public partial class SimpleUploadWithoutKey : PhoneApplicationPage
@@ -41,13 +42,29 @@ namespace QiniuLab.Controls.Upload
 
         private void SetFileName(object sender, Microsoft.Phone.Tasks.PhotoResult e)
         {
-            this.uploadFileStream = e.ChosenPhoto;
-            this.FileName.Text = e.OriginalFileName;
+            if (e != null && e.Error == null)
+            {
+                this.uploadFileStream = e.ChosenPhoto;
+                this.FileName.Text = e.OriginalFileName;
+            }
         }
 
         private void UploadFileButton_Click(object sender, RoutedEventArgs e)
         {
-            uploadFile();
+            if (this.FileName.Text.Trim().Length == 0)
+            {
+                return;
+            }
+            Task.Factory.StartNew(() =>
+            {
+                uploadFile();
+                Dispatcher.BeginInvoke(() =>
+                {
+                    //reset progress bar
+                    ProgressBar.Value = 0;
+                    FileName.Text = "";
+                });
+            });
         }
 
         private void uploadFile()
@@ -64,7 +81,14 @@ namespace QiniuLab.Controls.Upload
                     if (respDict.ContainsKey("uptoken"))
                     {
                         string upToken = respDict["uptoken"];
-                        FormUploader.uploadStream(httpManager, this.uploadFileStream, null, upToken, null, new CompletionCallback(delegate(ResponseInfo uploadRespInfo, string uploadResponse)
+                        UploadOptions uploadOptions = new UploadOptions();
+                        uploadOptions.ProgressCallback = new ProgressCallback(delegate(int bytesWritten, int totalBytes){
+                            int progress = (bytesWritten * 100 / totalBytes);
+                            Dispatcher.BeginInvoke(() => {
+                                ProgressBar.Value = progress;
+                            });
+                        });
+                        FormUploader.uploadStream(httpManager, this.uploadFileStream, null, upToken, uploadOptions, new CompletionCallback(delegate(ResponseInfo uploadRespInfo, string uploadResponse)
                         {
                             if (uploadRespInfo.isOk())
                             {
@@ -75,7 +99,6 @@ namespace QiniuLab.Controls.Upload
                             }
                             else
                             {
-
                                 Dispatcher.BeginInvoke(() =>
                                     MessageBox.Show(uploadRespInfo.ToString(), "上传失败", MessageBoxButton.OK)
                                 );

@@ -33,8 +33,8 @@
             <TextBox x:Name="FileName"  Height="72" TextWrapping="Wrap"/>
             <Button x:Name="UploadFileButton" Content="上传" Click="UploadFileButton_Click"/>
             <ProgressBar x:Name="ProgressBar"  Height="30"/>
-            <StackPanel Height="351" Background="Gray">
-                <TextBlock TextWrapping="Wrap" Text="TextBlock" Height="357" Margin="10,0"/>
+            <StackPanel Height="351" Background="Gray" Margin="10,0,10,0">
+                <TextBlock TextWrapping="Wrap" Height="351" Margin="0,0,0,0"/>
             </StackPanel>
         </StackPanel>
     </Grid>
