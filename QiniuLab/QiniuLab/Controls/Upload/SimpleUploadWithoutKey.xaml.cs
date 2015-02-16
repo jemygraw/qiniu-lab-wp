@@ -63,6 +63,9 @@ namespace QiniuLab.Controls.Upload
             Task.Factory.StartNew(() =>
             {
                 uploadFile();
+
+            }).ContinueWith((state) =>
+            {
                 Dispatcher.BeginInvoke(() =>
                 {
                     //reset progress bar
@@ -98,7 +101,7 @@ namespace QiniuLab.Controls.Upload
                             });
                         });
                         writeLog("开始上传文件...");
-                        FormUploader.uploadStream(httpManager, this.uploadFileStream, null, upToken, uploadOptions, new CompletionCallback(delegate(ResponseInfo uploadRespInfo, string uploadResponse)
+                        new FormUploader().uploadStream(httpManager, this.uploadFileStream, null, upToken, uploadOptions, new CompletionCallback(delegate(ResponseInfo uploadRespInfo, string uploadResponse)
                         {
                             if (uploadRespInfo.isOk())
                             {
