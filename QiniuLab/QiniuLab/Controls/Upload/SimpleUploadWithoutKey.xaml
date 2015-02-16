@@ -30,7 +30,6 @@
         <!--ContentPanel - place additional content here-->
         <StackPanel HorizontalAlignment="Left" Height="640" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="460">
             <Button x:Name="SelectButton" Content="选择" Click="SelectButton_Click"/>
-            <TextBox x:Name="FileName"  Height="72" TextWrapping="Wrap"/>
             <Button x:Name="UploadFileButton" Content="上传" Click="UploadFileButton_Click"/>
             <ProgressBar x:Name="ProgressBar"  Height="30"/>
             <StackPanel Height="351" Background="Gray" Margin="10,0,10,0">

@@ -19,6 +19,7 @@ namespace QiniuLab.Controls.Upload
         {
             InitializeComponent();
             this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_WITHOUT_KEY_UPTOKEN);
+            this.UploadFileButton.IsEnabled = false;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -48,18 +49,17 @@ namespace QiniuLab.Controls.Upload
                 //clear log
                 LogTextBlock.Text = "";
                 this.uploadFileStream = e.ChosenPhoto;
-                this.FileName.Text = e.OriginalFileName;
                 writeLog("选取文件:"+e.OriginalFileName);
+                this.UploadFileButton.IsEnabled = true;
             }
         }
 
         private void UploadFileButton_Click(object sender, RoutedEventArgs e)
         {
-            if (this.FileName.Text.Trim().Length == 0)
+            if (this.uploadFileStream == null)
             {
                 return;
             }
-          
             Task.Factory.StartNew(() =>
             {
                 uploadFile();
@@ -67,7 +67,7 @@ namespace QiniuLab.Controls.Upload
                 {
                     //reset progress bar
                     ProgressBar.Value = 0;
-                    FileName.Text = "";
+                    this.UploadFileButton.IsEnabled = false;
                 });
             });
         }
