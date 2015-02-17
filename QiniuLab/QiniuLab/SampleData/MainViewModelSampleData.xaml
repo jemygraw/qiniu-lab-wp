@@ -16,7 +16,7 @@
         <vm:ItemViewModel Name="指定上传文件的MimeType"/>
         <vm:ItemViewModel Name="启用上传文件CRC32校验"/>
         <vm:ItemViewModel Name="使用EndUser标注终端"/>
-        <vm:ItemViewModel Name="测试沙盒文件上传"/>
+        <vm:ItemViewModel Name="测试沙盒文件上传(表单方式)"/>
     </vm:MainViewModel.SimpleUploadItems>
 
     <vm:MainViewModel.AdvancedUploadItems>
