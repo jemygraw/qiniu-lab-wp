@@ -18,13 +18,13 @@ using System.Diagnostics;
 
 namespace QiniuLab.Controls.Upload
 {
-    public partial class SimpleUploadUseSandboxFile2 : PhoneApplicationPage
+    public partial class TestCaseUploadUseSandboxFile2 : PhoneApplicationPage
     {
         private HttpManager httpManager;
         private string upTokenUrl;
         private string filePath;
         private string fileName;
-        public SimpleUploadUseSandboxFile2()
+        public TestCaseUploadUseSandboxFile2()
         {
             InitializeComponent();
             this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_WITHOUT_KEY_UPTOKEN);
@@ -38,7 +38,7 @@ namespace QiniuLab.Controls.Upload
                 if (NavigationContext.QueryString.TryGetValue("selectedItem", out selectedIndex))
                 {
                     int index = int.Parse(selectedIndex);
-                    DataContext = App.ViewModel.SimpleUploadItems[index];
+                    DataContext = App.ViewModel.TestCaseUploadItems[index];
                 }
             }
         }

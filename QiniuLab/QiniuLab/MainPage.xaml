@@ -52,6 +52,23 @@
                     </phone:LongListSelector.ItemTemplate>
                 </phone:LongListSelector>
             </phone:PivotItem>
+
+            <!--Pivot item three-->
+            <phone:PivotItem Header="功能测试">
+                <!--Double line list no text wrapping-->
+                <phone:LongListSelector x:Name="TestCaseUploadLongListSelector" Margin="0,0,-12,0" ItemsSource="{Binding TestCaseUploadItems}" SelectionChanged="TestCaseUploadLongListSelector_SelectionChanged">
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,0,0,17">
+                                <TextBlock Text="{Binding Name}" TextWrapping="NoWrap" Margin="12,0,0,0" 
+                                               Style="{StaticResource PhoneTextExtraLargeStyle}"
+                                               FontSize="32"
+                                               />
+                            </StackPanel>
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+                </phone:LongListSelector>
+            </phone:PivotItem>
         </phone:Pivot>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are

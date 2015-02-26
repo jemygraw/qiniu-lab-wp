@@ -94,11 +94,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Config.cs" />
-    <Compile Include="Controls\Upload\SimpleUploadUseSandboxFile.xaml.cs">
-      <DependentUpon>SimpleUploadUseSandboxFile.xaml</DependentUpon>
+    <Compile Include="Controls\Upload\TestCaseUploadUseSandboxFile3.xaml.cs">
+      <DependentUpon>TestCaseUploadUseSandboxFile3.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Upload\SimpleUploadUseSandboxFile2.xaml.cs">
-      <DependentUpon>SimpleUploadUseSandboxFile2.xaml</DependentUpon>
+    <Compile Include="Controls\Upload\TestCaseUploadUseSandboxFile1.xaml.cs">
+      <DependentUpon>TestCaseUploadUseSandboxFile1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Upload\TestCaseUploadUseSandboxFile2.xaml.cs">
+      <DependentUpon>TestCaseUploadUseSandboxFile2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Upload\SimpleUploadWithoutKey.xaml.cs">
       <DependentUpon>SimpleUploadWithoutKey.xaml</DependentUpon>
@@ -121,11 +124,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="Controls\Upload\SimpleUploadUseSandboxFile.xaml">
+    <Page Include="Controls\Upload\TestCaseUploadUseSandboxFile3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Upload\SimpleUploadUseSandboxFile2.xaml">
+    <Page Include="Controls\Upload\TestCaseUploadUseSandboxFile1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Upload\TestCaseUploadUseSandboxFile2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

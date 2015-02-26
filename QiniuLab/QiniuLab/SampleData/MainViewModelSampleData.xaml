@@ -16,8 +16,6 @@
         <vm:ItemViewModel Name="指定上传文件的MimeType"/>
         <vm:ItemViewModel Name="启用上传文件CRC32校验"/>
         <vm:ItemViewModel Name="使用EndUser标注终端"/>
-        <vm:ItemViewModel Name="测试沙盒文件上传(表单上传)"/>
-        <vm:ItemViewModel Name="测试沙盒文件上传(分片上传)"/>
     </vm:MainViewModel.SimpleUploadItems>
 
     <vm:MainViewModel.AdvancedUploadItems>
@@ -28,5 +26,11 @@
         <vm:ItemViewModel Name="回调上传-JSON参数格式"/>
         <vm:ItemViewModel Name="上传后文件持久化操作"/>
     </vm:MainViewModel.AdvancedUploadItems>
+    
+    <vm:MainViewModel.TestCaseUploadItems>
+        <vm:ItemViewModel Name="测试沙盒文件上传(表单上传)"/>
+        <vm:ItemViewModel Name="测试沙盒文件上传(分片上传)"/>
+        <vm:ItemViewModel Name="测试沙盒文件上传(断点续传)"/>
+    </vm:MainViewModel.TestCaseUploadItems>
     
 </vm:MainViewModel>

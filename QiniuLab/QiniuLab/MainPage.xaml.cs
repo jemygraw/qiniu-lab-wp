@@ -37,20 +37,18 @@ namespace QiniuLab
 
         private void SimpleUploadLongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            object selected = SimpleUploadLongListSelector.SelectedItem;
+            object selected = this.SimpleUploadLongListSelector.SelectedItem;
             if (selected == null)
             {
                 return;
             }
 
-            ItemViewModel ivm = SimpleUploadLongListSelector.SelectedItem as ItemViewModel;
+            ItemViewModel ivm = this.SimpleUploadLongListSelector.SelectedItem as ItemViewModel;
             Int32 id = ivm.ID;
             string name = ivm.Name;
 
             Dictionary<int, string> navUrlDict = new Dictionary<int, string>();
             navUrlDict.Add(0, string.Format("/Controls/Upload/SimpleUploadWithoutKey.xaml?selectedItem={0}", ivm.ID));
-            navUrlDict.Add(11, string.Format("/Controls/Upload/SimpleUploadUseSandboxFile.xaml?selectedItem={0}", ivm.ID));
-            navUrlDict.Add(12, string.Format("/Controls/Upload/SimpleUploadUseSandboxFile2.xaml?selectedItem={0}", ivm.ID));
 
             string navUrl = "";
             if (navUrlDict.ContainsKey(id))
@@ -67,6 +65,35 @@ namespace QiniuLab
         private void AdvancedUploadLongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void TestCaseUploadLongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            object selected = this.TestCaseUploadLongListSelector.SelectedItem;
+            if (selected == null)
+            {
+                return;
+            }
+
+            ItemViewModel ivm = this.TestCaseUploadLongListSelector.SelectedItem as ItemViewModel;
+            Int32 id = ivm.ID;
+            string name = ivm.Name;
+
+            Dictionary<int, string> navUrlDict = new Dictionary<int, string>();
+            navUrlDict.Add(0, string.Format("/Controls/Upload/TestCaseUploadUseSandboxFile1.xaml?selectedItem={0}", ivm.ID));
+            navUrlDict.Add(1, string.Format("/Controls/Upload/TestCaseUploadUseSandboxFile2.xaml?selectedItem={0}", ivm.ID));
+            navUrlDict.Add(2, string.Format("/Controls/Upload/TestCaseUploadUseSandboxFile3.xaml?selectedItem={0}", ivm.ID));
+
+            string navUrl = "";
+            if (navUrlDict.ContainsKey(id))
+            {
+                navUrl = navUrlDict[id];
+            }
+            if (!string.IsNullOrWhiteSpace(navUrl))
+            {
+                NavigationService.Navigate(new Uri(navUrl, UriKind.Relative));
+            }
+            this.TestCaseUploadLongListSelector.SelectedItem = null;
         }
     }
 }
