@@ -46,13 +46,16 @@ namespace QiniuLab
             ItemViewModel ivm = SimpleUploadLongListSelector.SelectedItem as ItemViewModel;
             Int32 id = ivm.ID;
             string name = ivm.Name;
+
+            Dictionary<int, string> navUrlDict = new Dictionary<int, string>();
+            navUrlDict.Add(0, string.Format("/Controls/Upload/SimpleUploadWithoutKey.xaml?selectedItem={0}", ivm.ID));
+            navUrlDict.Add(11, string.Format("/Controls/Upload/SimpleUploadUseSandboxFile.xaml?selectedItem={0}", ivm.ID));
+            navUrlDict.Add(12, string.Format("/Controls/Upload/SimpleUploadUseSandboxFile2.xaml?selectedItem={0}", ivm.ID));
+
             string navUrl = "";
-            switch (id)
+            if (navUrlDict.ContainsKey(id))
             {
-                case 0:
-                    navUrl = string.Format("/Controls/Upload/SimpleUploadWithoutKey.xaml?selectedItem={0}", ivm.ID); break;
-                case 11:
-                    navUrl = string.Format("/Controls/Upload/SimpleUploadUseSandboxFile.xaml?selectedItem={0}", ivm.ID); break;
+                navUrl = navUrlDict[id];
             }
             if (!string.IsNullOrWhiteSpace(navUrl))
             {

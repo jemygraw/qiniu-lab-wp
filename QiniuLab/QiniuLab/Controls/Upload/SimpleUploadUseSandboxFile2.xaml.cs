@@ -7,23 +7,22 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Qiniu.Http;
 using System.IO.IsolatedStorage;
 using System.IO;
-using Qiniu.Http;
-using Qiniu.Storage;
-using Newtonsoft.Json;
-using System.Threading.Tasks;
 using System.Text;
-using System.Diagnostics;
+using Newtonsoft.Json;
+using Qiniu.Storage;
+using System.Threading.Tasks;
 
 namespace QiniuLab.Controls.Upload
 {
-    public partial class SimpleUploadUseSandboxFile : PhoneApplicationPage
+    public partial class SimpleUploadUseSandboxFile2 : PhoneApplicationPage
     {
         private HttpManager httpManager;
         private string upTokenUrl;
         private string filePath;
-        public SimpleUploadUseSandboxFile()
+        public SimpleUploadUseSandboxFile2()
         {
             InitializeComponent();
             this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_WITHOUT_KEY_UPTOKEN);
@@ -42,17 +41,7 @@ namespace QiniuLab.Controls.Upload
             }
         }
 
-        private void UploadStreamButton_Click(object sender, RoutedEventArgs e)
-        {
-            Upload(true);
-        }
-
         private void UploadFileButton_Click(object sender, RoutedEventArgs e)
-        {
-            Upload(false);
-        }
-
-        private void Upload(bool useStream)
         {
             int fileSize = 0;
             try
@@ -78,10 +67,10 @@ namespace QiniuLab.Controls.Upload
                 //create a temp file of the length of the specified value
                 this.filePath = createFile(fileSize);
                 //upload file by filePath
-                uploadFile(this.filePath, useStream);
+                uploadFile(this.filePath);
             });
-
         }
+
 
         private string createFile(int fileSize)
         {
@@ -114,7 +103,7 @@ namespace QiniuLab.Controls.Upload
             return filePath;
         }
 
-        private void uploadFile(string filePath, bool useStream)
+        private void uploadFile(string filePath)
         {
             if (filePath == null)
             {
@@ -165,16 +154,8 @@ namespace QiniuLab.Controls.Upload
                             }
                         });
 
-                        if (useStream)
-                        {
-                            IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication();
-                            Stream uploadFileStream = new IsolatedStorageFileStream(filePath, FileMode.Open, storage);
-                            new FormUploader().uploadStream(httpManager, uploadFileStream, null, upToken, uploadOptions, completionHandler);
-                        }
-                        else
-                        {
-                            new FormUploader().uploadFile(httpManager, filePath, null, upToken, uploadOptions, completionHandler);
-                        }
+                        ResumeUploader resumeUploader = new ResumeUploader(httpManager, null, null, filePath, null, upToken, uploadOptions, completionHandler);
+                        resumeUploader.uploadFile();
                     }
                     else
                     {

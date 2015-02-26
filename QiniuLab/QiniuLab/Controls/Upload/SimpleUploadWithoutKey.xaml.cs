@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Qiniu.Storage;
 using System.Threading.Tasks;
 using System.IO.IsolatedStorage;
+using System.Diagnostics;
 namespace QiniuLab.Controls.Upload
 {
     public partial class SimpleUploadWithoutKey : PhoneApplicationPage
@@ -49,7 +50,7 @@ namespace QiniuLab.Controls.Upload
                 //clear log
                 LogTextBlock.Text = "";
                 this.uploadFileStream = e.ChosenPhoto;
-                writeLog("选取文件:"+e.OriginalFileName);
+                writeLog("选取文件:" + e.OriginalFileName);
                 this.UploadFileButton.IsEnabled = true;
             }
         }
@@ -84,7 +85,7 @@ namespace QiniuLab.Controls.Upload
             {
                 this.httpManager = new HttpManager();
             }
-            httpManager.CompletionCallback = new CompletionCallback(delegate(ResponseInfo getTokenRespInfo, string getTokenResponse)
+            httpManager.CompletionHandler = new CompletionHandler(delegate(ResponseInfo getTokenRespInfo, string getTokenResponse)
             {
                 if (getTokenRespInfo.StatusCode == 200)
                 {
@@ -92,16 +93,19 @@ namespace QiniuLab.Controls.Upload
                     if (respDict.ContainsKey("uptoken"))
                     {
                         string upToken = respDict["uptoken"];
-                        writeLog("获取上传凭证:"+upToken);
-                        UploadOptions uploadOptions = new UploadOptions();
-                        uploadOptions.ProgressCallback = new ProgressCallback(delegate(int bytesWritten, int totalBytes){
-                            int progress = (bytesWritten * 100 / totalBytes);
-                            Dispatcher.BeginInvoke(() => {
+                        writeLog("获取上传凭证:" + upToken);
+                        UploadOptions uploadOptions = UploadOptions.defaultOptions();
+                        uploadOptions.ProgressHandler = new UpProgressHandler(delegate(string key, double percent)
+                        {
+                            int progress = (int)percent * 100;
+                            Dispatcher.BeginInvoke(() =>
+                            {
                                 ProgressBar.Value = progress;
                             });
                         });
                         writeLog("开始上传文件...");
-                        new FormUploader().uploadStream(httpManager, this.uploadFileStream, null, upToken, uploadOptions, new CompletionCallback(delegate(ResponseInfo uploadRespInfo, string uploadResponse)
+                        new FormUploader().uploadStream(httpManager, this.uploadFileStream, null, upToken, uploadOptions,
+                            new UpCompletionHandler(delegate(string key, ResponseInfo uploadRespInfo, string uploadResponse)
                         {
                             if (uploadRespInfo.isOk())
                             {
@@ -124,7 +128,7 @@ namespace QiniuLab.Controls.Upload
                     {
                         Dispatcher.BeginInvoke(() =>
                             MessageBox.Show(getTokenRespInfo.ToString(), "获取上传凭证失败", MessageBoxButton.OK)
-                        ); 
+                        );
                         writeLog("获取凭证失败!\r\n" + getTokenRespInfo.ToString());
                     }
                 }
@@ -141,7 +145,8 @@ namespace QiniuLab.Controls.Upload
 
         private void writeLog(string msg)
         {
-            Dispatcher.BeginInvoke(() => {
+            Dispatcher.BeginInvoke(() =>
+            {
                 this.LogTextBlock.Text += "\r\n" + msg;
             });
         }
