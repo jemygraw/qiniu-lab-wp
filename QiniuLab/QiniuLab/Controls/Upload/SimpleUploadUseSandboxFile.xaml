@@ -29,8 +29,10 @@
 
         <!--ContentPanel - place additional content here-->
         <StackPanel HorizontalAlignment="Left" Height="640" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="460">
-                <TextBlock Text="请输入文件大小" Margin="10,0,10,0"/>
-                <TextBox x:Name="FileSize"/>
+            <TextBlock Text="请输入文件名(可选)" Margin="10,0,10,0"/>
+            <TextBox x:Name="FileName"/>
+            <TextBlock Text="请输入文件大小" Margin="10,0,10,0"/>
+            <TextBox x:Name="FileSize"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

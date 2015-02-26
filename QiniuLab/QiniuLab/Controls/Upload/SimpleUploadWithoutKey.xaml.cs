@@ -97,7 +97,7 @@ namespace QiniuLab.Controls.Upload
                         UploadOptions uploadOptions = UploadOptions.defaultOptions();
                         uploadOptions.ProgressHandler = new UpProgressHandler(delegate(string key, double percent)
                         {
-                            int progress = (int)percent * 100;
+                            int progress = (int)(percent * 100);
                             Dispatcher.BeginInvoke(() =>
                             {
                                 ProgressBar.Value = progress;

@@ -14,6 +14,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Qiniu.Storage;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace QiniuLab.Controls.Upload
 {
@@ -22,6 +23,7 @@ namespace QiniuLab.Controls.Upload
         private HttpManager httpManager;
         private string upTokenUrl;
         private string filePath;
+        private string fileName;
         public SimpleUploadUseSandboxFile2()
         {
             InitializeComponent();
@@ -52,22 +54,30 @@ namespace QiniuLab.Controls.Upload
             {
                 return;
             }
+            if (this.FileName.Text.Trim().Length > 0)
+            {
+                this.fileName = this.FileName.Text.Trim();
+            }
             this.LogTextBlock.Text = "";
             //delete old file due to failed upload
             if (this.filePath != null)
             {
-                try
+                if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(this.filePath))
                 {
-                    IsolatedStorageFile.GetUserStoreForApplication().DeleteFile(this.filePath);
+                    this.deleteFile(this.filePath);
                 }
-                catch (Exception) { }
             }
             Task.Factory.StartNew(() =>
             {
                 //create a temp file of the length of the specified value
                 this.filePath = createFile(fileSize);
+                //reset progress bar
+                Dispatcher.BeginInvoke(() =>
+                {
+                    ProgressBar.Value = 0;
+                });
                 //upload file by filePath
-                uploadFile(this.filePath);
+                uploadFile(this.filePath, this.fileName);
             });
         }
 
@@ -103,7 +113,7 @@ namespace QiniuLab.Controls.Upload
             return filePath;
         }
 
-        private void uploadFile(string filePath)
+        private void uploadFile(string filePath, string fileName)
         {
             if (filePath == null)
             {
@@ -124,9 +134,16 @@ namespace QiniuLab.Controls.Upload
                         string upToken = respDict["uptoken"];
                         writeLog("获取上传凭证:" + upToken);
                         UploadOptions uploadOptions = UploadOptions.defaultOptions();
+                        uploadOptions.MimeType = "text/plain";
+                        uploadOptions.ExtraParams.Add("x:hello", "hello");
+                        uploadOptions.ExtraParams.Add("x:world", "world");
+                        uploadOptions.ExtraParams.Add("cloud", "cloud");
+                        uploadOptions.ExtraParams.Add("storage", "");
+                        uploadOptions.ExtraParams.Add("x:qiniu", "");
+                        uploadOptions.CheckCrc32 = true;
                         uploadOptions.ProgressHandler = new UpProgressHandler(delegate(string key, double percent)
                         {
-                            int progress = (int)percent * 100;
+                            int progress = (int)(percent * 100);
                             Dispatcher.BeginInvoke(() =>
                             {
                                 ProgressBar.Value = progress;
@@ -153,8 +170,9 @@ namespace QiniuLab.Controls.Upload
                                 deleteFile(this.filePath);
                             }
                         });
-
-                        ResumeUploader resumeUploader = new ResumeUploader(httpManager, null, null, filePath, null, upToken, uploadOptions, completionHandler);
+                        //string uploadKey = null;
+                        string uploadKey = fileName;
+                        ResumeUploader resumeUploader = new ResumeUploader(httpManager, null, null, filePath, uploadKey, upToken, uploadOptions, completionHandler);
                         resumeUploader.uploadFile();
                     }
                     else
@@ -191,10 +209,14 @@ namespace QiniuLab.Controls.Upload
             IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication();
             try
             {
-                writeLog("删除临时文件!");
                 storage.DeleteFile(filePath);
+                writeLog("成功删除临时文件!");
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                writeLog("删除临时文件失败!");
+                writeLog("原因:" + ex.Message);
+            }
         }
     }
 }
