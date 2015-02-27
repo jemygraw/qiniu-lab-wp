@@ -94,6 +94,12 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Config.cs" />
+    <Compile Include="Controls\Upload\SimpleUploadUseSaveKey.xaml.cs">
+      <DependentUpon>SimpleUploadUseSaveKey.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Upload\SimpleUploadWithKey.xaml.cs">
+      <DependentUpon>SimpleUploadWithKey.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Upload\TestCaseUploadUseSandboxFile3.xaml.cs">
       <DependentUpon>TestCaseUploadUseSandboxFile3.xaml</DependentUpon>
     </Compile>
@@ -124,6 +130,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\Upload\SimpleUploadUseSaveKey.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Upload\SimpleUploadWithKey.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Upload\TestCaseUploadUseSandboxFile3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

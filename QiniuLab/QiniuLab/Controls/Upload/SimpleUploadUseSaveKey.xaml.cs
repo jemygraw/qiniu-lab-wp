@@ -1,25 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using System.IO;
 using Qiniu.Http;
-using Newtonsoft.Json;
-using Qiniu.Storage;
 using System.Threading.Tasks;
-using System.IO.IsolatedStorage;
-using System.Diagnostics;
+using Qiniu.Storage;
+using Newtonsoft.Json;
+
 namespace QiniuLab.Controls.Upload
 {
-    public partial class SimpleUploadWithoutKey : PhoneApplicationPage
+    public partial class SimpleUploadUseSaveKey : PhoneApplicationPage
     {
         private Stream uploadFileStream;
         private HttpManager httpManager;
         private string upTokenUrl;
-        public SimpleUploadWithoutKey()
+        public SimpleUploadUseSaveKey()
         {
             InitializeComponent();
-            this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_WITHOUT_KEY_UPTOKEN);
+            this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_USE_SAVE_KEY_UPTOKEN);
             this.UploadFileButton.IsEnabled = false;
         }
 

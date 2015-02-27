@@ -49,7 +49,8 @@ namespace QiniuLab
 
             Dictionary<int, string> navUrlDict = new Dictionary<int, string>();
             navUrlDict.Add(0, string.Format("/Controls/Upload/SimpleUploadWithoutKey.xaml?selectedItem={0}", ivm.ID));
-
+            navUrlDict.Add(1, string.Format("/Controls/Upload/SimpleUploadWithKey.xaml?selectedItem={0}", ivm.ID));
+            navUrlDict.Add(2, string.Format("/Controls/Upload/SimpleUploadUseSaveKey.xaml?selectedItem={0}", ivm.ID));
             string navUrl = "";
             if (navUrlDict.ContainsKey(id))
             {

@@ -1,25 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using System.IO;
+using Microsoft.Phone.Shell;
 using Qiniu.Http;
-using Newtonsoft.Json;
-using Qiniu.Storage;
+using System.IO;
 using System.Threading.Tasks;
-using System.IO.IsolatedStorage;
-using System.Diagnostics;
+using Qiniu.Storage;
+using Newtonsoft.Json;
+
 namespace QiniuLab.Controls.Upload
 {
-    public partial class SimpleUploadWithoutKey : PhoneApplicationPage
+    public partial class SimpleUploadWithKey : PhoneApplicationPage
     {
         private Stream uploadFileStream;
+        private string uploadFileKey;
         private HttpManager httpManager;
         private string upTokenUrl;
-        public SimpleUploadWithoutKey()
+        public SimpleUploadWithKey()
         {
             InitializeComponent();
-            this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_WITHOUT_KEY_UPTOKEN);
+            this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_WITH_KEY_UPTOKEN);
             this.UploadFileButton.IsEnabled = false;
         }
 
@@ -57,10 +62,11 @@ namespace QiniuLab.Controls.Upload
 
         private void UploadFileButton_Click(object sender, RoutedEventArgs e)
         {
-            if (this.uploadFileStream == null)
+            if (this.uploadFileStream == null || this.FileName.Text.Trim().Length==0)
             {
                 return;
             }
+            this.uploadFileKey = this.FileName.Text.Trim();
             Task.Factory.StartNew(() =>
             {
                 uploadFile();
@@ -102,7 +108,7 @@ namespace QiniuLab.Controls.Upload
                             });
                         });
                         writeLog("开始上传文件...");
-                        new UploadManager().uploadStream(this.uploadFileStream, null, upToken, uploadOptions,
+                        new UploadManager().uploadStream(this.uploadFileStream, this.uploadFileKey, upToken, uploadOptions,
                             new UpCompletionHandler(delegate(string key, ResponseInfo uploadRespInfo, string uploadResponse)
                         {
                             if (uploadRespInfo.isOk())
