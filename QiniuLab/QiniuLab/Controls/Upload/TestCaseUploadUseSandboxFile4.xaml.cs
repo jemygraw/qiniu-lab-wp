@@ -11,6 +11,7 @@ using System.IO;
 using System.Text;
 using Qiniu.Storage;
 using Newtonsoft.Json;
+using Qiniu.Storage.Persistent;
 
 namespace QiniuLab.Controls.Upload
 {
@@ -169,6 +170,7 @@ namespace QiniuLab.Controls.Upload
                         //string uploadKey = null;
                         string uploadKey = fileName;
                         new UploadManager().uploadFile(filePath, uploadKey, upToken, uploadOptions, completionHandler);
+                        // new UploadManager().uploadFile(filePath, uploadKey, upToken, null, null);
                     }
                     else
                     {

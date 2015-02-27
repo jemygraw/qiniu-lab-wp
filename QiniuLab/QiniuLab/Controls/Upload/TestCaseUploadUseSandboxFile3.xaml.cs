@@ -183,6 +183,9 @@ namespace QiniuLab.Controls.Upload
                         string recorderKey = filePath;
                         ResumeUploader resumeUploader = new ResumeUploader(httpManager, recorder, recorderKey, filePath, uploadKey, upToken, uploadOptions, completionHandler);
                         resumeUploader.uploadFile();
+                        //ResumeRecorder resumeRecorder = new ResumeRecorder("test1");
+                        //KeyGenerator keyGen = new KeyGenerator(delegate() { return uploadKey; });
+                        //new UploadManager(resumeRecorder, keyGen).uploadFile(filePath, uploadKey, upToken, uploadOptions, completionHandler);
                     }
                     else
                     {
