@@ -112,33 +112,21 @@ namespace QiniuLab.Controls.Upload
                             if (uploadRespInfo.isOk())
                             {
                                 Dictionary<string, string> upRespDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(uploadResponse);
-                                Dispatcher.BeginInvoke(() =>
-                                    MessageBox.Show(string.Format("Key: {0}\r\nHash: {1}", upRespDict["key"], upRespDict["hash"]), "上传成功", MessageBoxButton.OK)
-                                );
                                 writeLog(string.Format("上传成功!\r\nKey: {0}\r\nHash: {1}", upRespDict["key"], upRespDict["hash"]));
                             }
                             else
                             {
-                                Dispatcher.BeginInvoke(() =>
-                                    MessageBox.Show(uploadRespInfo.ToString(), "上传失败", MessageBoxButton.OK)
-                                );
                                 writeLog("上传失败!\r\n" + uploadRespInfo.ToString());
                             }
                         }));
                     }
                     else
                     {
-                        Dispatcher.BeginInvoke(() =>
-                            MessageBox.Show(getTokenRespInfo.ToString(), "获取上传凭证失败", MessageBoxButton.OK)
-                        );
                         writeLog("获取凭证失败!\r\n" + getTokenRespInfo.ToString());
                     }
                 }
                 else
                 {
-                    Dispatcher.BeginInvoke(() =>
-                        MessageBox.Show(getTokenRespInfo.ToString(), "获取上传凭证失败", MessageBoxButton.OK)
-                    );
                     writeLog("获取凭证失败!\r\n" + getTokenRespInfo.ToString());
                 }
             });
