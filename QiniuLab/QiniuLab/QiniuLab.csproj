@@ -112,6 +112,9 @@
     <Compile Include="Controls\Upload\SimpleUploadWithoutKey.xaml.cs">
       <DependentUpon>SimpleUploadWithoutKey.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Upload\TestCaseUploadUseSandboxFile4.xaml.cs">
+      <DependentUpon>TestCaseUploadUseSandboxFile4.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -151,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Upload\SimpleUploadWithoutKey.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Upload\TestCaseUploadUseSandboxFile4.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

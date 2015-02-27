@@ -87,6 +87,7 @@ namespace QiniuLab.ViewModels
             this.TestCaseUploadItems.Add(new ItemViewModel() { ID = 0, Name = "测试沙盒文件上传(表单方式)" });
             this.TestCaseUploadItems.Add(new ItemViewModel() { ID = 1, Name = "测试沙盒文件上传(分片上传)" });
             this.TestCaseUploadItems.Add(new ItemViewModel() { ID = 2, Name = "测试沙盒文件上传(断点续传)" });
+            this.TestCaseUploadItems.Add(new ItemViewModel() { ID = 3, Name = "测试沙盒文件上传(自动判断)" });
             this.IsDataLoaded = true;
         }
 

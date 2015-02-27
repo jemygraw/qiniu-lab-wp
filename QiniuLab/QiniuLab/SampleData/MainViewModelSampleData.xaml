@@ -31,6 +31,7 @@
         <vm:ItemViewModel Name="测试沙盒文件上传(表单上传)"/>
         <vm:ItemViewModel Name="测试沙盒文件上传(分片上传)"/>
         <vm:ItemViewModel Name="测试沙盒文件上传(断点续传)"/>
+        <vm:ItemViewModel Name="测试沙盒文件上传(自动判断)"/>
     </vm:MainViewModel.TestCaseUploadItems>
     
 </vm:MainViewModel>

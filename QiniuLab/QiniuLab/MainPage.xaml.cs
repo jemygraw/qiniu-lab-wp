@@ -84,7 +84,7 @@ namespace QiniuLab
             navUrlDict.Add(0, string.Format("/Controls/Upload/TestCaseUploadUseSandboxFile1.xaml?selectedItem={0}", ivm.ID));
             navUrlDict.Add(1, string.Format("/Controls/Upload/TestCaseUploadUseSandboxFile2.xaml?selectedItem={0}", ivm.ID));
             navUrlDict.Add(2, string.Format("/Controls/Upload/TestCaseUploadUseSandboxFile3.xaml?selectedItem={0}", ivm.ID));
-
+            navUrlDict.Add(3, string.Format("/Controls/Upload/TestCaseUploadUseSandboxFile4.xaml?selectedItem={0}", ivm.ID));
             string navUrl = "";
             if (navUrlDict.ContainsKey(id))
             {
