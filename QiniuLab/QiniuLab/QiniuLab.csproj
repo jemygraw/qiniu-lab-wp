@@ -115,6 +115,9 @@
     <Compile Include="Controls\Upload\SimpleUploadWithKey.xaml.cs">
       <DependentUpon>SimpleUploadWithKey.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Upload\SimpleUploadWithMimeType.xaml.cs">
+      <DependentUpon>SimpleUploadWithMimeType.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Upload\TestCaseUploadUseSandboxFile3.xaml.cs">
       <DependentUpon>TestCaseUploadUseSandboxFile3.xaml</DependentUpon>
     </Compile>
@@ -173,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Upload\SimpleUploadWithKey.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Upload\SimpleUploadWithMimeType.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
