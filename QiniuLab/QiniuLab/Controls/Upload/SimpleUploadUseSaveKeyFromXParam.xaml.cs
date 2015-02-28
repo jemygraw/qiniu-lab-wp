@@ -113,7 +113,7 @@ namespace QiniuLab.Controls.Upload
                             if (uploadRespInfo.isOk())
                             {
                                 Dictionary<string, string> upRespDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(uploadResponse);
-                                writeLog(string.Format("上传成功!\r\nKey: {0}\r\nHash: {1}", upRespDict["key"], upRespDict["hash"]));
+                                writeLog(string.Format("上传成功!\r\nKey: {0}\r\nHash: {1}\r\nx:saveKeyEx: {2}", upRespDict["key"], upRespDict["hash"], upRespDict["x:saveKeyEx"]));
                             }
                             else
                             {
