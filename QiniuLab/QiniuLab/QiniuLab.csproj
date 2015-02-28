@@ -97,6 +97,9 @@
     <Compile Include="Controls\Upload\SimpleUploadUseSaveKey.xaml.cs">
       <DependentUpon>SimpleUploadUseSaveKey.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Upload\SimpleUploadUseSaveKeyFromXParam.xaml.cs">
+      <DependentUpon>SimpleUploadUseSaveKeyFromXParam.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Upload\SimpleUploadWithKey.xaml.cs">
       <DependentUpon>SimpleUploadWithKey.xaml</DependentUpon>
     </Compile>
@@ -134,6 +137,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="Controls\Upload\SimpleUploadUseSaveKey.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Upload\SimpleUploadUseSaveKeyFromXParam.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

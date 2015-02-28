@@ -1,25 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using System.IO;
 using Qiniu.Http;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Qiniu.Storage;
-using System.Threading.Tasks;
-using System.IO.IsolatedStorage;
-using System.Diagnostics;
+
 namespace QiniuLab.Controls.Upload
 {
-    public partial class SimpleUploadWithoutKey : PhoneApplicationPage
+    public partial class SimpleUploadUseSaveKeyFromXParam : PhoneApplicationPage
     {
         private Stream uploadFileStream;
+        private string xParam;
         private HttpManager httpManager;
         private string upTokenUrl;
-        public SimpleUploadWithoutKey()
+        public SimpleUploadUseSaveKeyFromXParam()
         {
             InitializeComponent();
-            this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_WITHOUT_KEY_UPTOKEN_PATH);
+            this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_USE_SAVE_KEY_FROM_XPARAM_PATH);
             this.UploadFileButton.IsEnabled = false;
         }
 
@@ -57,10 +58,11 @@ namespace QiniuLab.Controls.Upload
 
         private void UploadFileButton_Click(object sender, RoutedEventArgs e)
         {
-            if (this.uploadFileStream == null)
+            if (this.uploadFileStream == null || this.XParam.Text.Trim().Length == 0)
             {
                 return;
             }
+            this.xParam = this.XParam.Text.Trim();
             Task.Factory.StartNew(() =>
             {
                 uploadFile();
@@ -93,7 +95,8 @@ namespace QiniuLab.Controls.Upload
                         string upToken = respDict["uptoken"];
                         writeLog("获取上传凭证:" + upToken);
                         UploadOptions uploadOptions = UploadOptions.defaultOptions();
-                        uploadOptions.CheckCrc32 = true;
+                        //设置扩展参数x:saveKeyEx
+                        uploadOptions.ExtraParams.Add("x:saveKeyEx", this.xParam);
                         uploadOptions.ProgressHandler = new UpProgressHandler(delegate(string key, double percent)
                         {
                             int progress = (int)(percent * 100);
@@ -103,6 +106,7 @@ namespace QiniuLab.Controls.Upload
                             });
                         });
                         writeLog("开始上传文件...");
+                        //设置的key为null，即表示使用上传策略里面的SaveKey来作为文件保存在七牛的名字
                         new UploadManager().uploadStream(this.uploadFileStream, null, upToken, uploadOptions,
                             new UpCompletionHandler(delegate(string key, ResponseInfo uploadRespInfo, string uploadResponse)
                         {

@@ -24,7 +24,7 @@ namespace QiniuLab.Controls.Upload
         public SimpleUploadWithKey()
         {
             InitializeComponent();
-            this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_WITH_KEY_UPTOKEN);
+            this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_WITH_KEY_UPTOKEN_PATH);
             this.UploadFileButton.IsEnabled = false;
         }
 

@@ -27,7 +27,7 @@ namespace QiniuLab.Controls.Upload
         public TestCaseUploadUseSandboxFile1()
         {
             InitializeComponent();
-            this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_WITHOUT_KEY_UPTOKEN);
+            this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_WITHOUT_KEY_UPTOKEN_PATH);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -144,6 +144,7 @@ namespace QiniuLab.Controls.Upload
                         string upToken = respDict["uptoken"];
                         writeLog("获取上传凭证:" + upToken);
                         UploadOptions uploadOptions = UploadOptions.defaultOptions();
+                        uploadOptions.CheckCrc32 = true;
                         uploadOptions.ProgressHandler = new UpProgressHandler(delegate(string key, double percent)
                         {
                             int progress = (int)(percent * 100);
