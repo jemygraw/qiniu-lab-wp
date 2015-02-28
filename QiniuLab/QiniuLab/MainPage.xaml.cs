@@ -55,6 +55,7 @@ namespace QiniuLab
             navUrlDict.Add(4, string.Format("/Controls/Upload/SimpleUploadUseReturnBody.xaml?selectedItem={0}", ivm.ID));
             navUrlDict.Add(5, string.Format("/Controls/Upload/SimpleUploadOverwriteExistingFile.xaml?selectedItem={0}", ivm.ID));
             navUrlDict.Add(6, string.Format("/Controls/Upload/SimpleUploadUseFsizeLimit.xaml?selectedItem={0}", ivm.ID));
+            navUrlDict.Add(7, string.Format("/Controls/Upload/SimpleUploadUseMimeLimit.xaml?selectedItem={0}", ivm.ID));
             string navUrl = "";
             if (navUrlDict.ContainsKey(id))
             {

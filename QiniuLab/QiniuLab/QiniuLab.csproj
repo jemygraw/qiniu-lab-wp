@@ -100,6 +100,9 @@
     <Compile Include="Controls\Upload\SimpleUploadUseFsizeLimit.xaml.cs">
       <DependentUpon>SimpleUploadUseFsizeLimit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Upload\SimpleUploadUseMimeLimit.xaml.cs">
+      <DependentUpon>SimpleUploadUseMimeLimit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Upload\SimpleUploadUseReturnBody.xaml.cs">
       <DependentUpon>SimpleUploadUseReturnBody.xaml</DependentUpon>
     </Compile>
@@ -150,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Upload\SimpleUploadUseFsizeLimit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Upload\SimpleUploadUseMimeLimit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
