@@ -72,7 +72,29 @@ namespace QiniuLab
 
         private void AdvancedUploadLongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            object selected = this.AdvancedUploadLongListSelector.SelectedItem;
+            if (selected == null)
+            {
+                return;
+            }
 
+            ItemViewModel ivm = this.AdvancedUploadLongListSelector.SelectedItem as ItemViewModel;
+            Int32 id = ivm.ID;
+            string name = ivm.Name;
+
+            Dictionary<int, string> navUrlDict = new Dictionary<int, string>();
+            navUrlDict.Add(0, string.Format("/Controls/Upload/ResumableUploadWithoutKey.xaml?selectedItem={0}", ivm.ID));
+            navUrlDict.Add(1, string.Format("/Controls/Upload/ResumableUploadWithKey.xaml?selectedItem={0}", ivm.ID));
+            string navUrl = "";
+            if (navUrlDict.ContainsKey(id))
+            {
+                navUrl = navUrlDict[id];
+            }
+            if (!string.IsNullOrWhiteSpace(navUrl))
+            {
+                NavigationService.Navigate(new Uri(navUrl, UriKind.Relative));
+            }
+            this.AdvancedUploadLongListSelector.SelectedItem = null;
         }
 
         private void TestCaseUploadLongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
