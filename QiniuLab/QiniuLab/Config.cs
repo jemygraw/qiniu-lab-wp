@@ -15,7 +15,7 @@ namespace QiniuLab
         public const string SIMPLE_UPLOAD_USE_FSIZE_LIMIT_PATH = "/demos/api/simple_upload_use_fsize_limit_upload_token.php";
         public const string SIMPLE_UPLOAD_USE_MIME_LIMIT_PATH = "/demos/api/simple_upload_use_mime_limit_upload_token.php";
         public const string SIMPLE_UPLOAD_WITH_MIMETYPE_PATH = "/demos/api/simple_upload_with_mimetype_upload_token.php";
-        public const string SIMPLE_UPLOAD_ENABLE_CRC32_CHECK_PATH = "/demos/api/simple_upload_enable_crc32_check_upload_token.php";
+        public const string SIMPLE_UPLOAD_WITH_CRC32_CHECK_PATH = "/demos/api/simple_upload_enable_crc32_check_upload_token.php";
         public const string SIMPLE_UPLOAD_USE_ENDUSER_PATH = "/demos/api/simple_upload_use_enduser_upload_token.php";
 
         // resumable upload 

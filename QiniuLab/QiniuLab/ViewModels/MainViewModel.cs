@@ -75,11 +75,9 @@ namespace QiniuLab.ViewModels
             this.SimpleUploadItems.Add(new ItemViewModel() { ID = 7, Name = "限制文件上传类型" });
             this.SimpleUploadItems.Add(new ItemViewModel() { ID = 8, Name = "指定上传文件的MimeType" });
             this.SimpleUploadItems.Add(new ItemViewModel() { ID = 9, Name = "启用上传文件CRC32校验" });
-            this.SimpleUploadItems.Add(new ItemViewModel() { ID = 10, Name = "使用EndUser标注终端" });
 
             this.AdvancedUploadItems.Add(new ItemViewModel() { ID = 0, Name = "无Key大文件断点续传" });
             this.AdvancedUploadItems.Add(new ItemViewModel() { ID = 1, Name = "有Key大文件断点续传" });
-            this.AdvancedUploadItems.Add(new ItemViewModel() { ID = 2, Name = "批量文件上传" });
             this.AdvancedUploadItems.Add(new ItemViewModel() { ID = 3, Name = "回调上传-URL参数格式" });
             this.AdvancedUploadItems.Add(new ItemViewModel() { ID = 4, Name = "回调上传-JSON参数格式" });
             this.AdvancedUploadItems.Add(new ItemViewModel() { ID = 5, Name = "上传后文件持久化操作" });
