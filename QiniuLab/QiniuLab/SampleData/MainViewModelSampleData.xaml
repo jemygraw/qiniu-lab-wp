@@ -20,9 +20,6 @@
     <vm:MainViewModel.AdvancedUploadItems>
         <vm:ItemViewModel Name="无Key大文件断点续传"/>
         <vm:ItemViewModel Name="有Key大文件断点续传"/>
-        <vm:ItemViewModel Name="回调上传-URL参数格式"/>
-        <vm:ItemViewModel Name="回调上传-JSON参数格式"/>
-        <vm:ItemViewModel Name="上传后文件持久化操作"/>
     </vm:MainViewModel.AdvancedUploadItems>
     
     <vm:MainViewModel.TestCaseUploadItems>

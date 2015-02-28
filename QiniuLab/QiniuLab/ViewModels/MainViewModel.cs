@@ -78,9 +78,6 @@ namespace QiniuLab.ViewModels
 
             this.AdvancedUploadItems.Add(new ItemViewModel() { ID = 0, Name = "无Key大文件断点续传" });
             this.AdvancedUploadItems.Add(new ItemViewModel() { ID = 1, Name = "有Key大文件断点续传" });
-            this.AdvancedUploadItems.Add(new ItemViewModel() { ID = 3, Name = "回调上传-URL参数格式" });
-            this.AdvancedUploadItems.Add(new ItemViewModel() { ID = 4, Name = "回调上传-JSON参数格式" });
-            this.AdvancedUploadItems.Add(new ItemViewModel() { ID = 5, Name = "上传后文件持久化操作" });
 
             this.TestCaseUploadItems.Add(new ItemViewModel() { ID = 0, Name = "测试沙盒文件上传(表单方式)" });
             this.TestCaseUploadItems.Add(new ItemViewModel() { ID = 1, Name = "测试沙盒文件上传(分片上传)" });
