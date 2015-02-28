@@ -94,6 +94,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Config.cs" />
+    <Compile Include="Controls\Upload\SimpleUploadUseReturnBody.xaml.cs">
+      <DependentUpon>SimpleUploadUseReturnBody.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Upload\SimpleUploadUseSaveKey.xaml.cs">
       <DependentUpon>SimpleUploadUseSaveKey.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\Upload\SimpleUploadUseReturnBody.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Upload\SimpleUploadUseSaveKey.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

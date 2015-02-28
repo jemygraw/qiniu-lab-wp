@@ -3,24 +3,26 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using System.IO;
 using Qiniu.Http;
+using System.IO;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Qiniu.Storage;
+using Newtonsoft.Json;
 
 namespace QiniuLab.Controls.Upload
 {
-    public partial class SimpleUploadUseSaveKeyFromXParam : PhoneApplicationPage
+    public partial class SimpleUploadUseReturnBody : PhoneApplicationPage
     {
         private Stream uploadFileStream;
-        private string xParam;
+        private string xParam1;
+        private string xParam2;
+        private string uploadFileKey;
         private HttpManager httpManager;
         private string upTokenUrl;
-        public SimpleUploadUseSaveKeyFromXParam()
+        public SimpleUploadUseReturnBody()
         {
             InitializeComponent();
-            this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_USE_SAVE_KEY_FROM_XPARAM_PATH);
+            this.upTokenUrl = string.Format("{0}{1}", Config.API_HOST, Config.SIMPLE_UPLOAD_USE_RETURN_BODY_PATH);
             this.UploadFileButton.IsEnabled = false;
         }
 
@@ -58,11 +60,13 @@ namespace QiniuLab.Controls.Upload
 
         private void UploadFileButton_Click(object sender, RoutedEventArgs e)
         {
-            if (this.uploadFileStream == null || this.XParam.Text.Trim().Length == 0)
+            if (this.uploadFileStream == null || this.FileName.Text.Trim().Length == 0)
             {
                 return;
             }
-            this.xParam = this.XParam.Text.Trim();
+            this.xParam1 = this.XParam1.Text.Trim();
+            this.xParam2 = this.XParam2.Text.Trim();
+            this.uploadFileKey = this.FileName.Text.Trim();
             Task.Factory.StartNew(() =>
             {
                 uploadFile();
@@ -95,8 +99,8 @@ namespace QiniuLab.Controls.Upload
                         string upToken = respDict["uptoken"];
                         writeLog("获取上传凭证...");
                         UploadOptions uploadOptions = UploadOptions.defaultOptions();
-                        //设置扩展参数x:saveKeyEx
-                        uploadOptions.ExtraParams.Add("x:saveKeyEx", this.xParam);
+                        uploadOptions.ExtraParams.Add("x:exParam1", this.xParam1);
+                        uploadOptions.ExtraParams.Add("x:exParam2", this.xParam2);
                         uploadOptions.ProgressHandler = new UpProgressHandler(delegate(string key, double percent)
                         {
                             int progress = (int)(percent * 100);
@@ -106,14 +110,21 @@ namespace QiniuLab.Controls.Upload
                             });
                         });
                         writeLog("开始上传文件...");
-                        //设置的key为null，即表示使用上传策略里面的SaveKey来作为文件保存在七牛的名字
-                        new UploadManager().uploadStream(this.uploadFileStream, null, upToken, uploadOptions,
+                        new UploadManager().uploadStream(this.uploadFileStream, this.uploadFileKey, upToken, uploadOptions,
                             new UpCompletionHandler(delegate(string key, ResponseInfo uploadRespInfo, string uploadResponse)
                         {
                             if (uploadRespInfo.isOk())
                             {
                                 Dictionary<string, string> upRespDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(uploadResponse);
-                                writeLog(string.Format("上传成功!\r\nKey: {0}\r\nHash: {1}\r\nx:saveKeyEx: {2}", upRespDict["key"], upRespDict["hash"], upRespDict["x:saveKeyEx"]));
+                                writeLog(string.Format("上传成功!\r\nBucket: {0}\r\nKey: {1}\r\nHash: {2}", upRespDict["bucket"], upRespDict["key"], upRespDict["hash"]));
+                                if (upRespDict.ContainsKey("exParam1"))
+                                {
+                                    writeLog(string.Format("x:exParam1: {0}", upRespDict["exParam1"]));
+                                }
+                                if (upRespDict.ContainsKey("exParam2"))
+                                {
+                                    writeLog(string.Format("x:exParam2: {0}", upRespDict["exParam2"]));
+                                }
                             }
                             else
                             {

@@ -29,8 +29,14 @@
 
         <!--ContentPanel - place additional content here-->
         <StackPanel HorizontalAlignment="Left" Height="640" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="460">
-            <Button x:Name="SelectButton" Content="选择" Click="SelectButton_Click"/>
-            <Button x:Name="UploadFileButton" Content="上传" Click="UploadFileButton_Click"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="SelectButton" Grid.Column="0" Content="选择" Click="SelectButton_Click"/>
+                <Button x:Name="UploadFileButton" Grid.Column="1" Content="上传" Click="UploadFileButton_Click"/>
+            </Grid>
             <ProgressBar x:Name="ProgressBar"  Height="30"/>
             <StackPanel Height="450" Background="Gray" Margin="10,10,10,10">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">

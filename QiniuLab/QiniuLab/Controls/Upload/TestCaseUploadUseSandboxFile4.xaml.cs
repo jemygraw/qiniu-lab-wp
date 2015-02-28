@@ -129,7 +129,7 @@ namespace QiniuLab.Controls.Upload
                     if (respDict.ContainsKey("uptoken"))
                     {
                         string upToken = respDict["uptoken"];
-                        writeLog("获取上传凭证:" + upToken);
+                        writeLog("获取上传凭证...");
                         UploadOptions uploadOptions = UploadOptions.defaultOptions();
                         uploadOptions.MimeType = "text/plain";
                         uploadOptions.ExtraParams.Add("x:hello", "hello");
